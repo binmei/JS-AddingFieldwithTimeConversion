@@ -21,6 +21,11 @@ function add(){
     ctr++;
 }
 
+function delete(this){
+    var li = this.parentNode;
+    li = null;
+}
+
 function parse(){
     var retArr = [];
     var retStr = "";
