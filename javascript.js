@@ -17,9 +17,12 @@
 
 		function addRow(){
 			var newLi = document.createElement("li");
-			newLi.innerHTML = document.getElementById('firstLi').innerHTML;
+            var newID = "li" + ++idCtr;
+			newLi.innerHTML = document.getElementById('li1').innerHTML;
+            newLi.setAttribute("class", "rca_element");
+            newLi.setAttribute("id", newID);
 			document.getElementById('rca_list').append(newLi);
-			idCtr++;
+			// idCtr++;
 		}
 
 		// function delete(this){
@@ -74,8 +77,8 @@
 		
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", 'https://requestb.in/1iz9vsi1', true);
-			<!--xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
-			xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); -->
+			// <!--xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+			// xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); -->
 			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			xhr.send(JSON.stringify(payload));
 			console.log(JSON.stringify(payload));

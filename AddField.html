@@ -1,23 +1,25 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/javascript.js"></script>
+    <script src="javascript.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
-    <button onclick="add()">Add Fields</button>
-    <button onclick="parse()">Parse me</button>
-    <button onclick="convertTime()">Convert Time</button>
-    
-    <select>
+    <button id="rca_add_btn" onclick="addRow()">Add Fields</button>
+    <button id="rca_parse_btn" onclick="parse()">Parse me</button>
+    <button id="rca_convert_btn" onclick="convertTime()">Convert to UTC</button>
+    <button id="rca_post_btn" onclick="submitToSN()">Post to SN</button>
+
+    <select class="rca_select" id="rca_select">
         <option value="Pacific">Pacific</option>
         <option value="GMT">GMT</option>
     </select>
 
-    <ol class="list" id="list" style="list-style-type: none;">
-        <li class="element" id="firstLi">
-            <input type="datetime-local"></date>
+    <ol class="rca_list" id="rca_list" style="list-style-type: none;">
+        <li class="element" id="li1">
+            <br>
+            <input type="datetime-local"></input>
             <textarea type="html" class="input"></textarea>
             <button onclick="delete(this)">Delete</button>
         </li>
