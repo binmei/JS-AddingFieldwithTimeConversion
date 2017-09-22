@@ -1,7 +1,18 @@
-ol li input, ol li textarea{
-    display:inline-block;
-    float:left;
+ol li input, ol li textarea, ol li button{
+    display:inline;
     text-align:top;
+}
+
+ol li input{
+    float:left;
+}
+
+ol li button{
+    float:right;
+}
+
+ol li{
+    display:block;
 }
 
 ol li textarea{
@@ -12,4 +23,15 @@ ol li textarea{
 
 ol li textarea{
     margin-bottom:1%;
+}
+
+ol, #rca_preview_container{
+    display:block;
+    max-width:1600px;
+    width:70%;
+    margin: 0 15% 0 15%;
+}
+
+#rca_preview_container{
+    max-width:70%;
 }
