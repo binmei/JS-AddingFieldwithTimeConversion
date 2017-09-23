@@ -5,31 +5,31 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-
-    <button id="rca_add_btn" onclick="addRow();">Add Fields</button>
-    <button id="rca_parse_btn" onclick="clear();preview();">Preview</button>
-    <button id="rca_convert_btn" onclick="convertTime();">Convert to UTC</button>
-    <button id="rca_post_btn" onclick="submitToSN();">Post to SN</button>
-
-    <select class="rca_select" id="rca_select">
-        <option value="Pacific">Pacific</option>
-        <option value="GMT">GMT</option>
-    </select>
-
-    <ol class="rca_list" id="rca_list" style="list-style-type: none;">
-        <li class="rca_list_element" id="rca_li0">
-            <input type="datetime-local"></input>
-            <textarea type="html" class="input"></textarea>
-            <button onclick="deleteRow(this)">Delete</button>
-        </li>
-    </ol>
-
-    <div id="rca_preview_container">
-        <p><strong>RCA Preview Area:</strong></p>
-        <textarea id="rca_preview_text" type="html"></textarea>
-        <button onclick="clear()">Clear</button>
+    <div class="rca_btn_container">
+        <button id="rca_add_btn" onclick="addRow();">Add Fields</button>
+        <button id="rca_parse_btn" onclick="clear();preview();">Preview</button>
+        <button id="rca_convert_btn" onclick="convertTime();">Convert to UTC</button>
+        <button id="rca_post_btn" onclick="submitToSN();" disabled="true">Post to SN</button>
     </div>
+    <!-- <select class="rca_select" id="rca_select"> -->
+        <!-- <option value="Pacific">Pacific</option> -->
+        <!-- <option value="GMT">GMT</option> -->
+    <!-- </select> -->
+    <div class="rca_content_container">
+        <ol class="rca_list" id="rca_list" style="list-style-type: none;">
+            <li class="rca_list_element" id="rca_li0">
+                <input type="datetime-local"></input>
+                <textarea type="html" class="input"></textarea>
+                <button onclick="deleteRow(this)">Delete</button>
+            </li>
+        </ol>
 
+        <div id="rca_preview_container">
+            <p><strong>RCA Preview Area:</strong></p>
+            <textarea id="rca_preview_text" type="html"></textarea>
+            <button onclick="clear()">Clear</button>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -14,19 +14,29 @@
 			};
 		}
 
+        //Event handler for 
 		function addRow(){
-            var elementID = "rca_li" + ++idCtr;
-			var newLi = document.createElement("li");
-			newLi.innerHTML = document.getElementById('rca_li0').innerHTML;
-            newLi.setAttribute("class", "rca_list_element");
-            newLi.setAttribute("id", elementID);            
-			document.getElementById('rca_list').append(newLi);
+            if(listEmpty) {
+                
+                
+            } else {
+                var elementID = "rca_li" + ++idCtr;
+                var newLi = document.createElement("li");
+                newLi.innerHTML = document.getElementById('rca_li0').innerHTML;
+                newLi.setAttribute("class", "rca_list_element");
+                newLi.setAttribute("id", elementID);            
+                document.getElementById('rca_list').append(newLi);
+            }
 		}
 
 		function deleteRow(element){
 			$(element).parent('li').remove();
             parseInput();l
 		}
+        
+        function enablePostBtn(){
+            document.getElementById("rca_post_btn").disabled = false;
+        }
         
         function parseInput(){
             listOfDetails = [];
@@ -50,7 +60,7 @@
             
             for(i = 0; i < listOfDetails.length; i++){
 				var detail = listOfDetails[i];
-                displayStr += detail.getDate() + " " + detail.getReason() + "\n";
+                displayStr += detail.getDate() + " " + detail.getReason() + "<br \>";
 			}
 
             document.getElementById('rca_preview_text').innerHTML = displayStr;
@@ -59,19 +69,13 @@
 		function preview(){
 			parseInput();
 			displayList();
+            enablePostBtn();
 		}
         
-        function clear(){
-            document.getElementById('rca_preview_text').innerHTML = "";
-        }
-        
 		function convertTime(){
-			var timeFormat = document.getElementsByTagName("select")[0].value;
-			if(timeFormat.includes('GMT')){
-				convertToUTC(listOfDetails);
-			}
-            clear();
+			convertToUTC(listOfDetails);
             displayList();
+            enablePostBtn();
 		}
 
 		function convertToUTC(listOfDetails){            
@@ -95,15 +99,31 @@
 		}
 		
 		function submitToSN(str){
-			var payload = {
-				"text" : str
-			}
-		
-			var xhr = new XMLHttpRequest();
-//<!-- 			xhr.open("POST", 'https://theplatformdev.service-now.com/rca_compiler.do', true); -->
-			xhr.open("POST", 'https://requestb.in/xmwytaxm', true);
+            var confirmedToSend = false;
+            confirmedToSend = confirm("Send the payload to ServiceNow?");
+            if(confirmedToSend === true){
+                var payloadStr = "";
+                var i;
+                
+                for(i = 0; i < listOfDetails.length; i++){
+                    var detail = listOfDetails[i];
+                    payloadStr += detail.getDate() + " " + detail.getReason() + "<br />";
+                }
+                
+                var payload = {
+                    "text" : payloadStr
+                };
+            
+     
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", 'https://requestb.in/xmwytaxm', true);
 
-			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-			xhr.send(JSON.stringify(payload));
-			console.log(JSON.stringify(payload));
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify(payload));
+                console.log(JSON.stringify(payload));
+                alert("Payload has been sent.");
+            } else {
+                alert("Payload not sent.");
+            }
+           
 		}

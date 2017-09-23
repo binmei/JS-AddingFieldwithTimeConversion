@@ -4,7 +4,7 @@ ol li input, ol li textarea, ol li button{
 }
 
 ol li input{
-    float:left;
+    float:left; 
 }
 
 ol li button{
@@ -16,7 +16,7 @@ ol li{
 }
 
 ol li textarea{
-    margin-left:2%;
+   margin-left:2%;
     height:20%;
     width:70%;
 }
@@ -25,7 +25,11 @@ ol li textarea{
     margin-bottom:1%;
 }
 
-ol, #rca_preview_container{
+#rca_list {
+    padding: 0 0 0 0;
+}
+
+.rca_content_container{
     display:block;
     max-width:1600px;
     width:70%;
@@ -34,4 +38,8 @@ ol, #rca_preview_container{
 
 #rca_preview_container{
     max-width:70%;
+}
+
+#rca_preview_text{
+    width:90%;
 }
