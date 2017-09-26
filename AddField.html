@@ -5,17 +5,21 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-    <div class="rca_btn_container">
-        <button id="rca_add_btn" onclick="addRow();">Add Fields</button>
-        <button id="rca_parse_btn" onclick="clearPreview();preview();">Preview</button>
-        <button id="rca_convert_btn" onclick="convertTime();">Convert to UTC</button>
-        <button id="rca_post_btn" onclick="submitToSN();" disabled="true">Post to SN</button>
+
+    <div id="rca_irt_select_container">
+        <p><strong>Please Select an IRT:</strong></p>
+        <p><i>Note: The RCA Would be based on this IRT</i></p>
+        <g:ui_reference name="cirt" id="cirt" table="u_incident_response" value="${jvar_cirt}" displayvalue="${jvar_cirt_display}"/>
     </div>
-    <!-- <select class="rca_select" id="rca_select"> -->
-        <!-- <option value="Pacific">Pacific</option> -->
-        <!-- <option value="GMT">GMT</option> -->
-    <!-- </select> -->
-    <div class="rca_content_container">
+
+    <div class="rca_btn_container" id="rca_btn_container">
+        <button id="rca_add_btn" onclick="addRow();">Add Timeline</button>
+        <button id="rca_parse_btn" onclick="clearRCAPreview();preview();">Preview</button>
+        <button id="rca_convert_btn" onclick="convertTime();">Convert to UTC</button>
+        <button id="rca_post_btn" onclick="submitToSN();" disabled="true">Update RCA</button>
+    </div>
+
+    <div class="rca_content_container" id="rca_content_container">
         <ol class="rca_list" id="rca_list" style="list-style-type: none;">
             <li class="rca_list_element" id="rca_li0">
                 <input type="datetime-local"></input>
@@ -24,10 +28,10 @@
             </li>
         </ol>
 
-        <div id="rca_preview_container">
+        <div class="rca_preview_container" id="rca_preview_container">
             <p><strong>RCA Preview Area:</strong></p>
             <textarea id="rca_preview_text" type="html"></textarea>
-            <button onclick="clearPreview();">Clear</button>
+            <button onclick="clearRCAPreview();">Clear</button>
         </div>
     </div>
 

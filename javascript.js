@@ -14,7 +14,6 @@
 			};
 		}
 
-        //Event handler for 
 		function addRow(){
             var tempList = document.getElementById('rca_list');
             var isEmptyList = tempList.getElementsByTagName('*').length == 0;
@@ -46,26 +45,32 @@
         }
         
 		function deleteRow(element){
-            var ele = element;
+			var ele = element;
             var par = ele.parentNode;
             document.getElementById(par.id).remove();
             parseInput();
-            // $(element).parent('li').remove();
-            // parseInput();
 		}
         
+        
         function enablePostBtn(){
-            document.getElementById("rca_post_btn").disabled = false;
+			var irt_num = document.getElementById('sys_display.cirt').value;
+			var previewText = document.getElementById('rca_preview_text').value;
+			var containsInvalid = false;
+			containsInvalid = previewText.includes('Invalid Date');
+			if(irt_num != "" &amp;&amp; previewText != "" &amp;&amp; containsInvalid === false){
+				document.getElementById("rca_post_btn").disabled = false;
+			} else {
+				alert("Please make sure the IRT field, Date, and Description Fields are filled in properly!");
+			}
         }
         
         function parseInput(){
-            listOfDetails = [];
-            
+            listOfDetails = [];            
             var i;
             var list = document.getElementById('rca_list');
             var items = list.getElementsByTagName('li');
         
-			for(i = 0; i < items.length; i++){
+			for(i = 0; i &lt; items.length; i++){
 				var date = new Date(items[i].getElementsByTagName("input")[0].value);
 				var description = items[i].getElementsByTagName("textarea")[0].value;
 				var detail = new Detail(date, description);
@@ -73,20 +78,15 @@
 			}
         }
         
-        function parseTime(str){
-            var time = str.split(':');
-            return time[0] + ":" + time[1];
-        }
-        
         function displayList(){
-            
             var i;
             var displayStr = '';
             
-            for(i = 0; i < listOfDetails.length; i++){
+            for(i = 0; i &lt; listOfDetails.length; i++){
 				var detail = listOfDetails[i];
                 displayStr += detail.getDate() + " " + detail.getReason() + "\n";
 			}
+
             document.getElementById('rca_preview_text').innerHTML = displayStr;
         }
         
@@ -97,6 +97,7 @@
 		}
         
 		function convertTime(){
+			parseInput();
 			convertToUTC(listOfDetails);
             displayList();
             enablePostBtn();
@@ -106,7 +107,7 @@
 			var i;
             var tempStr = "";
 		
-			for(i = 0; i < listOfDetails.length; i++){
+			for(i = 0; i &lt; listOfDetails.length; i++){
 				var detail = listOfDetails[i];
                 var weekDay = [7];
                 weekDay[1] = "Monday";
@@ -122,37 +123,35 @@
 			}
 		}
 		
+		function clearRCAPreview(){
+            document.getElementById('rca_preview_text').innerHTML = '';
+			document.getElementById("rca_post_btn").disabled = true;
+        }
+		
 		function submitToSN(str){
             var confirmedToSend = false;
-            confirmedToSend = confirm("Send the payload to ServiceNow?");
+			var irt_num = document.getElementById('sys_display.cirt').value;
+            confirmedToSend = confirm("Update RCA Now?\n\nWarning: This will overwrite RCA's Incident Description Field if it's already written.");
             if(confirmedToSend === true){
                 var payloadStr = "";
                 var i;
                 
-                for(i = 0; i < listOfDetails.length; i++){
+                for(i = 0; i &lt; listOfDetails.length; i++){
                     var detail = listOfDetails[i];
-                    payloadStr += detail.getDate() + " " + detail.getReason() + "<br \>";
-                }
+                    payloadStr += detail.getDate() + " " + detail.getReason() + "&lt;br \&gt;";
+                };
                 
                 var payload = {
-                    // "text" : payloadStr
-                    "text" : "cake"
+					"irt_num" : irt_num,
+                    "text" : payloadStr
                 };
             
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", 'https://requestb.in/xzk6x5xz', true);
-                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+               
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify(payload));
-                console.log(JSON.stringify(payload));
-                alert("Payload has been sent.");
+                alert("RCA has not been updated.");
             } else {
-                alert("Payload not sent.");
+                alert("RCA has been updated.");
             }
-           
 		}
-                       
-        function clearPreview(){
-            // console.log(document.getElementById('rca_preview_text').innerHTML);
-            document.getElementById('rca_preview_text').innerHTML = '';
-        }

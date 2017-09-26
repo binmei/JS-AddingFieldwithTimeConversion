@@ -1,45 +1,96 @@
-ol li input, ol li textarea, ol li button{
-    display:inline;
-    text-align:top;
-}
+    #rca_list .rca_list_element input, #rca_list .rca_list_element textarea, #rca_list .rca_list_element button{
+		display:inline;
+		text-align:top;
+	}
 
-ol li input{
-    float:left; 
-}
+	#rca_list .rca_list_element input{
+		float:left; 
+	}
 
-ol li button{
-    float:right;
-}
+	#rca_list .rca_list_element button{
+		float:right;
+		color:red;
+		background:none;
+		background-color:white;
+		font-weight:bold;
+	}
 
-ol li{
-    display:block;
-}
+	#rca_list .rca_list_element button:hover{
+		color:white;
+		background-color:red;
+	}
 
-ol li textarea{
-   margin-left:2%;
-    height:20%;
-    width:70%;
-}
+	#rca_list .rca_list_element{
+		display:block;
+	}
 
-ol li textarea{
-    margin-bottom:1%;
-}
+	#rca_list .rca_list_element textarea{
+	   margin-left:2%;
+		height:30%;
+		width:65%;
+		max-width:65%;
+	}
 
-#rca_list {
-    padding: 0 0 0 0;
-}
+	#rca_list .rca_list_element textarea{
+		margin-bottom:1%;
+	}
 
-.rca_content_container{
-    display:block;
-    max-width:1600px;
-    width:70%;
-    margin: 0 15% 0 15%;
-}
+	#rca_list {
+		padding: 0 0 0 0;
+	}
 
-#rca_preview_container{
-    max-width:70%;
-}
+	#rca_irt_select_container, #rca_btn_container{
+		margin-bottom:2%;
+	}
 
-#rca_preview_text{
-    width:90%;
-}
+	#rca_irt_select_container, #rca_btn_container, #rca_content_container{
+		margin-left:15%;
+		margin-right:15%;
+		width:70%;
+	}
+
+	#rca_btn_container, #rca_content_container, #rca_preview_container{
+		display:block;
+		max-width:1600px;
+	}
+
+	#rca_btn_container button{
+		background-color:#f2f2f2;
+		background: none;
+		color:#74C40B;
+		font-weight:bold;
+	}
+
+	#rca_btn_container button:hover{
+		background-color:#74C40B;
+		color:#f2f2f2;
+	}
+
+	#rca_btn_container button:disabled{
+		background-color:#f2f2f2;
+		background: none;
+		color:#e8fccf;
+		font-weight:bold;
+	}
+
+	#rca_preview_container{
+		max-width:100%;
+	}
+
+	#rca_preview_text{
+		width:100%;
+		height:20%;
+		resize:vertical;
+	}
+
+	#rca_preview_container button{
+		background:none;
+		background-color:white;
+		color:orange;
+		font-weight:bold;
+	}
+
+	#rca_preview_container button:hover{
+		color:#f2f2f2;
+		background-color:orange;
+	}
