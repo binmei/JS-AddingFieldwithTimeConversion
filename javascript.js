@@ -16,22 +16,42 @@
 
         //Event handler for 
 		function addRow(){
-            if(listEmpty) {
-                
-                
+            var tempList = document.getElementById('rca_list');
+            var isEmptyList = tempList.getElementsByTagName('*').length == 0;
+            
+            if(isEmptyList) {
+                addFirst();    
             } else {
                 var elementID = "rca_li" + ++idCtr;
                 var newLi = document.createElement("li");
-                newLi.innerHTML = document.getElementById('rca_li0').innerHTML;
+                var tempItem = tempList.getElementsByTagName('li');
+                tempItemId = tempItem[0].id;
+                newLi.innerHTML = document.getElementById(tempItemId).innerHTML;
                 newLi.setAttribute("class", "rca_list_element");
                 newLi.setAttribute("id", elementID);            
                 document.getElementById('rca_list').append(newLi);
             }
 		}
-
+        
+        function addFirst(){
+            var elementID = "rca_li0";
+            var newLi = document.createElement("li");
+            
+            newLi.innerHTML = '<input type="datetime-local"></input>' +
+                '<textarea type="html" class="input"></textarea>' + 
+                '<button onclick="deleteRow(this)">Delete</button>';
+            newLi.setAttribute("class", "rca_list_element");
+            newLi.setAttribute("id", elementID);            
+            document.getElementById('rca_list').append(newLi);
+        }
+        
 		function deleteRow(element){
-			$(element).parent('li').remove();
-            parseInput();l
+            var ele = element;
+            var par = ele.parentNode;
+            document.getElementById(par.id).remove();
+            parseInput();
+            // $(element).parent('li').remove();
+            // parseInput();
 		}
         
         function enablePostBtn(){
@@ -53,6 +73,11 @@
 			}
         }
         
+        function parseTime(str){
+            var time = str.split(':');
+            return time[0] + ":" + time[1];
+        }
+        
         function displayList(){
             
             var i;
@@ -60,9 +85,8 @@
             
             for(i = 0; i < listOfDetails.length; i++){
 				var detail = listOfDetails[i];
-                displayStr += detail.getDate() + " " + detail.getReason() + "<br \>";
+                displayStr += detail.getDate() + " " + detail.getReason() + "\n";
 			}
-
             document.getElementById('rca_preview_text').innerHTML = displayStr;
         }
         
@@ -107,17 +131,17 @@
                 
                 for(i = 0; i < listOfDetails.length; i++){
                     var detail = listOfDetails[i];
-                    payloadStr += detail.getDate() + " " + detail.getReason() + "<br />";
+                    payloadStr += detail.getDate() + " " + detail.getReason() + "<br \>";
                 }
                 
                 var payload = {
-                    "text" : payloadStr
+                    // "text" : payloadStr
+                    "text" : "cake"
                 };
             
-     
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", 'https://requestb.in/xmwytaxm', true);
-
+                xhr.open("POST", 'https://requestb.in/xzk6x5xz', true);
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify(payload));
                 console.log(JSON.stringify(payload));
@@ -127,3 +151,8 @@
             }
            
 		}
+                       
+        function clearPreview(){
+            // console.log(document.getElementById('rca_preview_text').innerHTML);
+            document.getElementById('rca_preview_text').innerHTML = '';
+        }
